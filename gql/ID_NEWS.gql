@@ -1,0 +1,19 @@
+query ID_NEWS($ID: ID) {
+  news(filters: { id: { eq: $ID } }) {
+    data {
+      id
+      attributes {
+        Name
+        Desc
+        Photo{
+          data{
+            attributes{
+              url
+            }
+          }
+        }
+        createdAt
+      }
+    }
+  }
+}

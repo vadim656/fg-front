@@ -1,0 +1,18 @@
+query ALL_NEWS {
+  news {
+    data {
+      id
+      attributes {
+        Name
+        Photo{
+          data{
+            attributes{
+              url
+            }
+          }
+        }
+        createdAt
+      }
+    }
+  }
+}

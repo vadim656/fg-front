@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: "Golos";
+    font-weight: normal;
+    src: local("Golos"),url("~assets/fonts/golos-text_regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Golos";
+    font-weight: bold;
+    src: local("Golos"),url("~assets/fonts/golos-text_bold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Golos";
+    font-weight: medium;
+    src: local("Golos"),url("~assets/fonts/golos-text_medium.woff2") format("woff2");
+}
+
+
+
+html {
+    font-family: "Golos";
+    letter-spacing: 0.03rem;
+    color: #242424;
+}
+
+.anime {
+  @apply motion-safe:transition duration-[0.25s] ease-in-out ;
+  }
+
+.input-form {
+    @apply border border-[#E4E4E4] px-3 py-4 rounded-md bg-transparent;
+}
+
+
+.gradient {
+    background: linear-gradient(94.93deg, #E34134 -1.32%, #C74242 188.57%), linear-gradient(92.23deg, #E34134 -3.32%, #C74242 111.03%), linear-gradient(97.08deg, #D25147 -5.76%, #C74242 185.48%);
+}

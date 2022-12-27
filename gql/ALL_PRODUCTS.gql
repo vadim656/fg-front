@@ -1,0 +1,28 @@
+query ALL_PRODUCTS {
+  products {
+    data {
+      id
+      attributes {
+        Name
+        SubName
+        Price
+        Desc
+        Photo{
+          data{
+            attributes{
+              url
+            }
+          }
+        }
+        categories {
+          data {
+            id
+            attributes {
+              Name
+            }
+          }
+        }
+      }
+    }
+  }
+}

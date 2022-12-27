@@ -1,0 +1,19 @@
+query ID_PRODUCT($ID: ID) {
+  product(id: $ID){
+    data{
+      attributes{
+        Name
+        Desc
+        Price
+        SubName
+        Photo{
+          data{
+            attributes{
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
