@@ -41,13 +41,13 @@ export default {
   ],
 
   publicRuntimeConfig: {
-    baseURL: 'http://admin.felix-good.ru:1337/'
+    baseURL: 'http://admin.felix-good.ru:1337'
   },
 
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://admin.felix-good.ru:1337/'
+        httpEndpoint: 'http://admin.felix-good.ru:1337/graphql'
       }
     }
   },

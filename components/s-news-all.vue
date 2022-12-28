@@ -19,7 +19,7 @@
           <div class="h-full flex flex-col justify-center items-center">
             <img
               :src="
-                `http://localhost:1337` +
+                $config.baseURL +
                   slide.attributes.Photo.data.attributes.url
               "
               alt=""
@@ -62,7 +62,7 @@ export default {
     H3Title
   },
   props: {
-    news: Array
+    news: Object
   },
   data () {
     return {

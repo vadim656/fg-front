@@ -124,7 +124,7 @@ export default {
     agile: VueAgile
   },
   props: {
-    products: Array
+    products: Object
   },
   methods: {},
   computed: {
