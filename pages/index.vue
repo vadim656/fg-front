@@ -1,7 +1,7 @@
 <template>
   <div class="h-full flex flex-col gap-14">
-    <section>
-      <main-slider />
+    <section v-if="sliders">
+      <main-slider :sliders="sliders"/>
     </section>
     <section v-if="products">
       <s-slider-product :products="products" />
@@ -23,6 +23,7 @@ import SSliderProduct from '~/components/s-slider-product.vue'
 
 import ALL_PRODUCTS from '~/gql/ALL_PRODUCTS.gql'
 import ALL_NEWS from '~/gql/ALL_NEWS.gql'
+import GET_SLIDERS from '../gql/GET_SLIDERS.gql'
 
 export default {
   components: { mainSlider, SSliderProduct, SNewsAll, SContactForm },
@@ -33,6 +34,9 @@ export default {
     },
     news: {
       query: ALL_NEWS
+    },
+    sliders: {
+      query: GET_SLIDERS
     }
   }
 }

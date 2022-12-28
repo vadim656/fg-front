@@ -1,32 +1,60 @@
 <template>
   <div class="w-screen slider-bg-custom h-[900px] relative">
-    <img src="~/assets/img/bg1.png" class="hidden sm:block absolute top-0 left-0 z-[10]">
-    <img src="~/assets/img/bg2.png" class="hidden sm:block absolute  sm:top-[640px]  sm:left-0 z-[1]">
-    <img src="~/assets/img/bg3.png" class="hidden sm:block absolute top-24 right-0 sm:right-24 z-[1]">
-    <img src="~/assets/img/bg3.png" class="hidden sm:block absolute  top-32 right-12 z-[1]">
-    <img src="~/assets/img/bg3.png" class="absolute top-[300px] right-[200px]   sm:right-[500px] z-[1]">
+    <img
+      src="~/assets/img/bg1.png"
+      class="hidden sm:block absolute top-0 left-0 z-[10]"
+    />
+    <img
+      src="~/assets/img/bg2.png"
+      class="hidden sm:block absolute  sm:top-[640px]  sm:left-0 z-[1]"
+    />
+    <img
+      src="~/assets/img/bg3.png"
+      class="hidden sm:block absolute top-24 right-0 sm:right-24 z-[1]"
+    />
+    <img
+      src="~/assets/img/bg3.png"
+      class="hidden sm:block absolute  top-32 right-12 z-[1]"
+    />
+    <img
+      src="~/assets/img/bg3.png"
+      class="absolute top-[300px] right-[200px]   sm:right-[500px] z-[1]"
+    />
     <client-only placeholder="Загрузка...">
       <agile id="main-sliders" ref="mainSliderRef" :options="mainSlider">
-        <div v-for="(slide, i) in 6" :key="i" class="slide p-4 h-full">
-          <div class="h-full flex flex-col-reverse sm:flex-row  justify-center items-center">
+        <div
+          v-for="(slide, i) in sliders.data"
+          :key="i"
+          class="slide p-4 h-full"
+        >
+          <div
+            class="h-full flex flex-col-reverse sm:flex-row  justify-center items-center"
+          >
             <div class="flex flex-col text-white gap-4">
-              <span class="text-[40px] sm:text-[72px] font-medium">Товар года</span>
+              <span class="text-[40px] sm:text-[72px] font-medium">{{
+                slide.attributes.H1
+              }}</span>
               <span
                 class="text-[100px] sm:text-[172px] font-['Oranienbaum'] pl-24 sm:leading-[10rem]"
-                >2022</span
+                >{{ slide.attributes.H2 }}</span
               >
-              <span class="text-sm block w-full sm:max-w-[360px]"
-                >Lorem ipsum is placeholder text commonly used in the graphic,
-                print, and publishing industries for previewing layouts and
-                visual mockups.</span
-              >
-              <button
-                class="p-4 rounded-md border border-white w-full max-w-[180px]"
+              <span class="text-sm block w-full sm:max-w-[360px]" >{{
+                slide.attributes.H3
+              }}</span>
+              <nuxt-link :to="slide.attributes.URL"
+                class="p-4 rounded-md border border-white w-full max-w-[200px] flex justify-center items-center"
               >
                 Перейти к товару
-              </button>
+              </nuxt-link>
             </div>
-            <img src="~/assets/img/sous1.png" alt=""  class="w-[80%] sm:w-full"/>
+            <img
+              :src="
+                $config.baseURL +
+                  slide.attributes.Photo.data.attributes.url
+              "
+              alt=""
+              class="w-[80%] sm:w-full max-w-[400px]"
+            />
           </div>
         </div>
       </agile>
@@ -36,7 +64,11 @@
 
 <script>
 import { VueAgile } from 'vue-agile'
+
 export default {
+  props: {
+    sliders: Object
+  },
   components: {
     agile: VueAgile
   },
@@ -62,9 +94,9 @@ export default {
 <style>
 .slider-bg-custom {
   background: url('../assets/img/950950.jpg');
-  background-position: center; 
-  background-repeat: no-repeat; 
-  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
 }
 

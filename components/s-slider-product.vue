@@ -126,6 +126,11 @@ export default {
   props: {
     products: Object
   },
+  data() {
+    return {
+      productID: 1
+    }
+  },
   methods: {},
   computed: {
     getProductsSlider () {
