@@ -12,6 +12,13 @@ query GET_SLIDERS{
             }
           }
         }
+        LevitIMG{
+          data{
+            attributes{
+              url
+            }
+          }
+        }
         URL
       }
     }

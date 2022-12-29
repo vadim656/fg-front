@@ -1,32 +1,36 @@
 <template>
   <div class="w-screen slider-bg-custom h-[900px] relative">
-    <img
-      src="~/assets/img/bg1.png"
-      class="hidden sm:block absolute top-0 left-0 z-[10]"
-    />
-    <img
-      src="~/assets/img/bg2.png"
-      class="hidden sm:block absolute  sm:top-[640px]  sm:left-0 z-[1]"
-    />
-    <img
-      src="~/assets/img/bg3.png"
-      class="hidden sm:block absolute top-24 right-0 sm:right-24 z-[1]"
-    />
-    <img
-      src="~/assets/img/bg3.png"
-      class="hidden sm:block absolute  top-32 right-12 z-[1]"
-    />
-    <img
-      src="~/assets/img/bg3.png"
-      class="absolute top-[300px] right-[200px]   sm:right-[500px] z-[1]"
-    />
     <client-only placeholder="Загрузка...">
       <agile id="main-sliders" ref="mainSliderRef" :options="mainSlider">
         <div
           v-for="(slide, i) in sliders.data"
           :key="i"
-          class="slide p-4 h-full"
+          class="slide p-4 h-full relative"
         >
+          <img
+            :src="
+              $config.baseURL + slide.attributes.LevitIMG.data.attributes.url
+            "
+            class="absolute top-[400px] sm:top-[300px] right-[200px] w-[50%] sm:w-full   sm:right-[500px] z-[-1] rotate-180"
+          />
+          <img
+            :src="
+              $config.baseURL + slide.attributes.LevitIMG.data.attributes.url
+            "
+            class="hidden sm:block absolute top-0 left-0 z-[-1] rotate-90"
+          />
+          <img
+            :src="
+              $config.baseURL + slide.attributes.LevitIMG.data.attributes.url
+            "
+            class="hidden sm:block absolute  sm:top-[440px]  sm:left-0 z-[-1] max-w-[200px] rotate-45"
+          />
+          <img
+            :src="
+              $config.baseURL + slide.attributes.LevitIMG.data.attributes.url
+            "
+            class="hidden sm:block absolute  top-32 right-12 z-[-1]"
+          />
           <div
             class="h-full flex flex-col-reverse sm:flex-row  justify-center items-center"
           >
@@ -35,26 +39,30 @@
                 slide.attributes.H1
               }}</span>
               <span
-                class="text-[100px] sm:text-[172px] font-['Oranienbaum'] pl-24 sm:leading-[10rem]"
+                class="text-[100px] sm:text-[172px] font-['Oranienbaum'] sm:pl-24 sm:leading-[10rem]"
                 >{{ slide.attributes.H2 }}</span
               >
-              <span class="text-sm block w-full sm:max-w-[360px]" >{{
+              <span class="text-sm block w-full sm:max-w-[360px]">{{
                 slide.attributes.H3
               }}</span>
-              <nuxt-link :to="slide.attributes.URL"
+              <nuxt-link
+                :to="slide.attributes.URL"
                 class="p-4 rounded-md border border-white w-full max-w-[200px] flex justify-center items-center"
               >
                 Перейти к товару
               </nuxt-link>
             </div>
-            <img
-              :src="
-                $config.baseURL +
-                  slide.attributes.Photo.data.attributes.url
-              "
-              alt=""
-              class="w-[80%] sm:w-full max-w-[400px]"
-            />
+            <kinesis-container class="">
+              <kinesis-element :strength="30">
+                <img
+                  :src="
+                    $config.baseURL + slide.attributes.Photo.data.attributes.url
+                  "
+                  alt=""
+                  class="pl-10 mt-10 sm:mt-0 sm:pl-0 w-[80%] h-auto object-cover sm:w-full max-w-[400px]"
+                />
+              </kinesis-element>
+            </kinesis-container>
           </div>
         </div>
       </agile>

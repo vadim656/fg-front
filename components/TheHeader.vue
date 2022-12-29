@@ -29,7 +29,7 @@
         </div>
         <div class="flex gap-1 items-center">
           <img src="~assets/icons/Message_light.svg" alt="" />
-          <span>feliksgrupp@mail.ru</span>
+          <span>ketchup2022@bk.ru</span>
         </div>
       </div>
     </div>

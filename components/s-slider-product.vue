@@ -94,7 +94,7 @@
             >
               <div class="h-full flex flex-col justify-center items-center">
                 <img :src="$config.baseURL +
-                  item.attributes.Photo.data[0].attributes.url" alt="" class="p-6"/>
+                  item.attributes.Photo.data[0].attributes.url" alt="" class="p-10 h-full max-h-[400px]"/>
        
                 <div class="flex items-end gap-2 ">
                   <div class="flex flex-col gap-2 items-start sm:items-center mt-10 text-sm">

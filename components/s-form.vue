@@ -24,21 +24,23 @@
             class="input-form"
           />
         </div>
-        <div class="sm:col-span-1 flex flex-col gap-2">
-          <label for="" class="text-sm">Товар</label>
-          <input
+        <div class="sm:col-span-2 flex flex-col gap-2">
+          <label for="" class="text-sm">Сообщение</label>
+          <textarea
             v-model="form.product"
-            type="text"
-            placeholder="Соус"
-            class="input-form"
-          />
+            id="message"
+            rows="4"
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 "
+            placeholder="Напишите..."
+          ></textarea>
         </div>
         <div class="sm:col-span-2 flex flex-col gap-2">
           <label for="" class="text-sm">Телефон</label>
           <input
             v-model="form.phone"
             type="text"
-            placeholder="+7"
+             placeholder="+7"
+            v-facade="'+7 (###) ###-##-##'"
             class="input-form"
           />
         </div>
@@ -59,7 +61,9 @@
         <img src="~/assets/icons/arrow-form.svg" alt="" />
         Оставить заявку
       </button>
-      <span v-if="succes == true" class="mt-6">Спасибо! Ваша заявка принята.</span>
+      <span v-if="succes == true" class="mt-6"
+        >Спасибо! Ваша заявка принята.</span
+      >
     </div>
   </div>
 </template>

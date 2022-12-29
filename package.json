@@ -21,7 +21,9 @@
     "vue": "^2.7.10",
     "vue-agile": "^2.0.0",
     "vue-server-renderer": "^2.7.10",
-    "vue-template-compiler": "^2.7.10"
+    "vue-template-compiler": "^2.7.10",
+    "vue-kinesis": "^1.2.3",
+    "vue-input-facade": "^2.0.1"
   },
   "devDependencies": {}
 }

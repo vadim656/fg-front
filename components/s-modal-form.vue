@@ -8,7 +8,7 @@
       class="bg-gray-900/50 absolute w-screen h-screen z-[99] "
     ></div>
     <div
-      class="w-[90%] p-4 rounded-md bg-white flex justify-center items-center z-[100] drop-shadow-lg"
+      class="max-w-[320px] p-4 rounded-md bg-white flex justify-center items-center z-[100] drop-shadow-lg"
     >
       <slot />
     </div>

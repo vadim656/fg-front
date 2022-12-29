@@ -14,7 +14,7 @@
             <img
               src="~/assets/img/image14.png"
               alt=""
-              class=" absolute -top-20 -left-24 z-[1]"
+              class=" absolute -top-20 -right-24  sm:-left-24 z-[1] w-[50%] sm:w-[70%]"
             />
             <span
               class="font-['Oranienbaum'] text-[64px] text-[#242424]/5 leading-[1]"
@@ -25,13 +25,8 @@
               <span class="font-['Oranienbaum'] text-4xl">
                 {{ productData.attributes.Name }}</span
               >
-              <span class="text-lg">
-                {{ productData.attributes.SubName }}</span
-              >
-              <span
-                class="text-sm"
-                v-html="productData.attributes.Desc"
-              ></span>
+              <span class="text-lg"> {{ productData.attributes.SubName }}</span>
+              <span class="text-sm" v-html="productData.attributes.Desc"></span>
             </div>
             <div class="flex flex-col sm:flex-row justify-start gap-4 w-4/5">
               <div
@@ -76,18 +71,21 @@
             alt=""
             class="w-auto h-full max-h-[600px] z-[2]"
           />
-          <img
+          <!-- <img
             src="~/assets/img/image12.png"
             alt=""
-            class="hidden sm:block absolute top-12 right-0 z-[1]"
-          />
+            class="hidden sm:block absolute top-12 right-[400px] z-[1]"
+          /> -->
           <img
             src="~/assets/img/Ellipse168.png"
-            class="hidden sm:block absolute top-36 right-0 z-[0]"
+            class="hidden sm:block absolute top-36 right-0 z-[0] w-[calc(30%+2rem)]"
           />
           <s-modal-form ref="modalOrder">
-            <div class="w-full">
-              <form action="" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="w-full max-w-[320px]">
+              <form
+                action=""
+                class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[320px]"
+              >
                 <div class="sm:col-span-2 flex flex-col gap-2">
                   <label for="" class="text-sm">Ваше имя</label>
                   <input type="text" placeholder="Иван" class="input-form" />
@@ -96,13 +94,23 @@
                   <label for="" class="text-sm">Организация</label>
                   <input type="text" placeholder="ООО" class="input-form" />
                 </div>
-                <div class="sm:col-span-1 flex flex-col gap-2">
-                  <label for="" class="text-sm">Товар</label>
-                  <input type="text" placeholder="Соус" class="input-form" />
+                <div class="sm:col-span-2 flex flex-col gap-2">
+                  <label for="" class="text-sm">Сообщение</label>
+                  <textarea
+                    id="message"
+                    rows="4"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 "
+                    placeholder="Напишите..."
+                  ></textarea>
                 </div>
                 <div class="sm:col-span-2 flex flex-col gap-2">
                   <label for="" class="text-sm">Телефон</label>
-                  <input type="text" placeholder="+7" class="input-form" />
+                  <input
+                    type="text"
+                    placeholder="+7"
+                    v-facade="'+7 (###) ###-##-##'"
+                    class="input-form"
+                  />
                 </div>
                 <div class="sm:col-span-2 flex flex-col gap-2">
                   <label for="" class="text-sm">Email</label>
@@ -167,14 +175,13 @@
             class="flex flex-col gap-4 justify-center items-center"
           >
             <img
-            class="p-6"
+              class="p-6"
               :src="
-                $config.baseURL +
-                  item.attributes.Photo.data[0].attributes.url
+                $config.baseURL + item.attributes.Photo.data[0].attributes.url
               "
               alt=""
             />
-            
+
             <div class="flex items-end gap-2 ">
               <div
                 class="flex flex-col gap-2 items-start sm:items-center mt-10 text-sm"
@@ -218,7 +225,7 @@ export default {
     }
   },
   computed: {
-    productData(){
+    productData () {
       return this.product.data
     },
     getProductsSlider () {
