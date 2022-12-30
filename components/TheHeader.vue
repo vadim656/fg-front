@@ -13,7 +13,7 @@
         <ul class="flex items-center gap-1 sm:gap-4">
           <li v-for="(item, i) in menu" :key="i" class="">
             <nuxt-link
-              to="/"
+              :to="item.url"
               class="hover:underline hover:underline-offset-4 anime text-sm"
               >{{ item.name }}</nuxt-link
             >
@@ -95,8 +95,14 @@
           class="flex w-full h-full justify-center items-center bg-gray-900/80  p-3"
         >
           <ul class="flex px-4 flex-col gap-2 text-white">
-            <li v-for="(item, i) in menu" :key="i" @click="mobActive = !mobActive">
-              <nuxt-link :to="item.url" class="text-2xl">{{ item.name }}</nuxt-link>
+            <li
+              v-for="(item, i) in menu"
+              :key="i"
+              @click="mobActive = !mobActive"
+            >
+              <nuxt-link :to="item.url" class="text-2xl">{{
+                item.name
+              }}</nuxt-link>
             </li>
           </ul>
         </div>
@@ -116,12 +122,13 @@ export default {
           url: '/'
         },
         {
-          name: 'Вся продукция',
-          url: '/'
-        },
-        {
           name: 'Новости',
           url: '/news'
+        },
+
+        {
+          name: 'Сотрудничество',
+          url: '/sotrudnichestvo'
         },
         {
           name: 'Контакты',

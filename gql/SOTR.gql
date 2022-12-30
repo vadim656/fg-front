@@ -1,0 +1,9 @@
+query SOTR{
+  sotrudnichestvo{
+    data{
+      attributes{
+        Text
+      }
+    }
+  }
+}

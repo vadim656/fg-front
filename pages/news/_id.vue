@@ -14,7 +14,7 @@
           v-html="
             getNew.attributes.Desc.replaceAll(
               '/uploads',
-              'http://localhost:1337/uploads'
+              'http://admin.felix-good.ru/uploads'
             )
           "
         ></p>
