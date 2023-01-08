@@ -17,11 +17,11 @@
               class=" absolute -top-20 -right-24  sm:-left-24 z-[1] w-[50%] sm:w-[70%]"
             />
             <span
-              class="font-['Oranienbaum'] text-[64px] text-[#242424]/5 leading-[1]"
+              class="font-['Oranienbaum'] text-[64px] text-[#242424]/5 leading-[1] w-full"
             >
               {{ productData.attributes.Name }}
             </span>
-            <div class="flex flex-col justify-start items-start gap-4 z-[2]">
+            <div class="flex flex-col justify-start items-start gap-4 z-[2] w-full">
               <span class="font-['Oranienbaum'] text-4xl">
                 {{ productData.attributes.Name }}</span
               >
@@ -69,17 +69,14 @@
                 productData.attributes.Photo.data[0].attributes.url
             "
             alt=""
-            class="w-auto h-full max-h-[600px] z-[2]"
+            class="w-auto h-full max-h-[600px] z-[0]"
           />
           <!-- <img
             src="~/assets/img/image12.png"
             alt=""
             class="hidden sm:block absolute top-12 right-[400px] z-[1]"
           /> -->
-          <img
-            src="~/assets/img/Ellipse168.png"
-            class="hidden sm:block absolute top-36 right-0 z-[0] w-[calc(30%+2rem)]"
-          />
+          
           <s-modal-form ref="modalOrder">
             <div class="w-full max-w-[320px]">
               <form
@@ -129,6 +126,10 @@
               </button>
             </div>
           </s-modal-form>
+          <img
+            src="~/assets/img/Ellipse168.png"
+            class="hidden sm:visible absolute top-36 right-0 z-[0] w-[calc(30%+2rem)]"
+          />
         </div>
       </div>
       <section class="flex flex-col gap-6">

@@ -4,41 +4,40 @@
       <div
         class="hidden sm:block w-4/12 bg-white p-8 rounded-2xl drop-shadow-2xl"
       >
-        <div class="flex flex-col justify-start items-center gap-4 relative ">
+        <div
+          class="flex flex-col justify-start items-center gap-4 relative "
+          v-if="slideProductData"
+        >
           <img
             src="~/assets/img/image14.png"
             alt=""
             class="absolute -top-16 -right-20 rotate-12"
           />
           <h3
-            class="font-['Oranienbaum'] text-[72px] text-[#242424]/5 leading-[1]"
+            class="font-['Oranienbaum'] text-[72px] text-[#242424]/5 leading-[1] w-full"
           >
-            Соус Томатный Острый
+            {{ slideProductData.attributes.Name }}
           </h3>
-          <div class="flex flex-col justify-start items-start gap-4">
-            <span class="font-['Oranienbaum'] text-4xl"
-              >Соус Томатный Острый</span
-            >
-            <span class="text-lg">По-Грузински</span>
-            <span class="text-sm"
-              >Lorem ipsum is placeholder text commonly used in the graphic,
-              print, and publishing industries for previewing layouts and visual
-              mockups.</span
-            >
+          <div class="flex flex-col justify-start items-start gap-4 w-full">
+            <span class="font-['Oranienbaum'] text-4xl">{{
+              slideProductData.attributes.Name
+            }}</span>
+            <span class="text-lg">{{ slideProductData.attributes.SubName }}</span>
+            <span class="text-sm" v-html="slideProductData.attributes.Desc"></span>
           </div>
           <div class="flex flex-col gap-12 w-full">
             <nuxt-link
-              :to="'/products/' + 1"
+              :to="'/products/' + slideProductData.id"
               class="flex justify-center items-center gap-1 gradient p-6 rounded-md text-white font-medium max-w-[216px]"
             >
               <img src="~/assets/icons/Arrow_down_light.svg" alt="" />
               Перейти к товару
             </nuxt-link>
             <div class="flex gap-4">
-              <button @click="$refs.carousel.goToPrev()">
+              <button @click="prevSlide">
                 <img src="../assets/icons/arrow-slider.svg" alt="" />
               </button>
-              <button @click="$refs.carousel.goToNext()">
+              <button @click="nextSlide">
                 <img
                   src="../assets/icons/arrow-slider.svg"
                   alt=""
@@ -52,7 +51,10 @@
       <div class="w-full sm:w-8/12 h-full flex flex-col gap-4 sm:block">
         <div class="flex w-full justify-center gap-2">
           <button
-            @click="tabs = 1"
+            @click="
+              tabs = 1
+              slideProduct = 0
+            "
             :class="[
               tabs == 1
                 ? 'gradient text-white border-none'
@@ -63,7 +65,10 @@
             Соусы
           </button>
           <button
-            @click="tabs = 2"
+            @click="
+              tabs = 2
+              slideProduct = 0
+            "
             :class="[
               tabs == 2
                 ? 'gradient text-white border-none'
@@ -74,7 +79,10 @@
             Кетчупы
           </button>
           <button
-            @click="tabs = 3"
+            @click="
+              tabs = 3
+              slideProduct = 0
+            "
             :class="[
               tabs == 3
                 ? 'gradient text-white border-none'
@@ -86,18 +94,31 @@
           </button>
         </div>
         <client-only placeholder="Загрузка...">
-          <agile id="products" ref="carousel" :options="allInfo">
+          <agile
+            id="products"
+            ref="carousel"
+            :options="allInfo"
+            :key="getProductsSlider.length"
+          >
             <div
               v-for="(item, i) in getProductsSlider"
               :key="i"
               class="slide p-4 h-full "
             >
               <div class="h-full flex flex-col justify-center items-center">
-                <img :src="$config.baseURL +
-                  item.attributes.Photo.data[0].attributes.url" alt="" class="p-10 h-full max-h-[400px]"/>
-       
+                <img
+                  :src="
+                    $config.baseURL +
+                      item.attributes.Photo.data[0].attributes.url
+                  "
+                  alt=""
+                  class="p-10 h-full max-h-[400px]"
+                />
+
                 <div class="flex items-end gap-2 ">
-                  <div class="flex flex-col gap-2 items-start sm:items-center mt-10 text-sm">
+                  <div
+                    class="flex flex-col gap-2 items-start sm:items-center mt-10 text-sm"
+                  >
                     <span class="text-[#242424]/50">{{
                       item.attributes.SubName
                     }}</span>
@@ -126,13 +147,29 @@ export default {
   props: {
     products: Object
   },
-  data() {
-    return {
-      productID: 1
+  methods: {
+    nextSlide () {
+      this.$refs.carousel.goToNext()
+      if (this.getProductsSlider.length - 1 == this.slideProduct) {
+        this.slideProduct = 0
+      } else {
+        this.slideProduct++
+      }
+    },
+    prevSlide () {
+      this.$refs.carousel.goToPrev()
+      if (this.slideProduct == 0) {
+        this.slideProduct = this.getProductsSlider.length - 1
+      } else {
+        console.log(this.getProductsSlider.length, this.slideProduct)
+        this.slideProduct--
+      }
     }
   },
-  methods: {},
   computed: {
+    slideProductData () {
+      return this.getProductsSlider[this.slideProduct]
+    },
     getProductsSlider () {
       if (this.tabs == 1) {
         return this.products.data.filter(
@@ -152,6 +189,7 @@ export default {
   data () {
     return {
       tabs: 1,
+      slideProduct: 0,
       allInfo: {
         navButtons: false,
         centerMode: true,

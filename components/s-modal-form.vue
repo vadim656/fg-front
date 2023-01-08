@@ -5,10 +5,10 @@
   >
     <div
       @click="active = !active"
-      class="bg-gray-900/50 absolute w-screen h-screen z-[99] "
+      class="bg-gray-900/50 absolute w-screen h-screen z-[999999] "
     ></div>
     <div
-      class="max-w-[320px] p-4 rounded-md bg-white flex justify-center items-center z-[100] drop-shadow-lg"
+      class="max-w-[320px] p-4 rounded-md bg-white flex justify-center items-center z-[9999999] drop-shadow-lg"
     >
       <slot />
     </div>

@@ -1,7 +1,7 @@
 <template>
-  <div class="my-20 pt-20 container">
+  <div class="my-20 pt-20 container px-4">
       <div v-if="sotrudnichestvo" v-html="dataSotr"></div>
-      <span>Загрузка...</span>
+      <span v-else>Загрузка...</span>
   </div>
 </template>
 

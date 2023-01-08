@@ -45,13 +45,13 @@ export default {
   ],
 
   publicRuntimeConfig: {
-    baseURL: 'http://admin.felix-good.ru:1337'
+    baseURL: 'http://admin.felix-good.ru'
   },
 
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://admin.felix-good.ru:1337/graphql'
+        httpEndpoint: 'http://admin.felix-good.ru/graphql'
       }
     }
   },
@@ -59,7 +59,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/'
+    baseURL: 'http://felix-good.ru'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

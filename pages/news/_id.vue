@@ -1,6 +1,6 @@
 <template>
   <div class="h-full flex flex-col gap-14 container mt-24 pt-12">
-    <div v-if="news" class="flex flex-col gap-12">
+    <div v-if="news" class="flex flex-col gap-12 px-4">
       <div >
         <span class="flex gap-1 text-gray-500">
           <nuxt-link to="/">Главная</nuxt-link> /

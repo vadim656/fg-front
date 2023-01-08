@@ -1,5 +1,5 @@
 query ALL_PRODUCTS {
-  products {
+  products(pagination: { limit: 50 }) {
     data {
       id
       attributes {
@@ -7,9 +7,9 @@ query ALL_PRODUCTS {
         SubName
         Price
         Desc
-        Photo{
-          data{
-            attributes{
+        Photo {
+          data {
+            attributes {
               url
             }
           }
