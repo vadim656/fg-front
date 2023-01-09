@@ -21,7 +21,9 @@
             >
               {{ productData.attributes.Name }}
             </span>
-            <div class="flex flex-col justify-start items-start gap-4 z-[2] w-full">
+            <div
+              class="flex flex-col justify-start items-start gap-4 z-[2] w-full"
+            >
               <span class="font-['Oranienbaum'] text-4xl">
                 {{ productData.attributes.Name }}</span
               >
@@ -76,26 +78,37 @@
             alt=""
             class="hidden sm:block absolute top-12 right-[400px] z-[1]"
           /> -->
-          
+
           <s-modal-form ref="modalOrder">
             <div class="w-full max-w-[320px]">
               <form
                 action=""
-                class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[320px]"
+                class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[320px] pb-3"
               >
                 <div class="sm:col-span-2 flex flex-col gap-2">
                   <label for="" class="text-sm">Ваше имя</label>
-                  <input type="text" placeholder="Иван" class="input-form" />
+                  <input
+                    v-model="form.name"
+                    type="text"
+                    placeholder="Иван"
+                    class="input-form"
+                  />
                 </div>
                 <div class="sm:col-span-1 flex flex-col gap-2">
                   <label for="" class="text-sm">Организация</label>
-                  <input type="text" placeholder="ООО" class="input-form" />
+                  <input
+                    v-model="form.org"
+                    type="text"
+                    placeholder="ООО"
+                    class="input-form"
+                  />
                 </div>
                 <div class="sm:col-span-2 flex flex-col gap-2">
                   <label for="" class="text-sm">Сообщение</label>
                   <textarea
                     id="message"
                     rows="4"
+                    v-model="form.product"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 "
                     placeholder="Напишите..."
                   ></textarea>
@@ -103,6 +116,7 @@
                 <div class="sm:col-span-2 flex flex-col gap-2">
                   <label for="" class="text-sm">Телефон</label>
                   <input
+                    v-model="form.phone"
                     type="text"
                     placeholder="+7"
                     v-facade="'+7 (###) ###-##-##'"
@@ -112,6 +126,7 @@
                 <div class="sm:col-span-2 flex flex-col gap-2">
                   <label for="" class="text-sm">Email</label>
                   <input
+                    v-model="form.email"
                     type="text"
                     placeholder="email@email.ru"
                     class="input-form"
@@ -119,11 +134,15 @@
                 </div>
               </form>
               <button
-                class="flex items-center gap-2 gradient text-white p-6 rounded-lg mt-12"
+                @click="getTeelegrammToProduct"
+                class="flex items-center gap-2 gradient text-white p-6 rounded-lg mt-6"
               >
                 <img src="~/assets/icons/arrow-form.svg" alt="" />
                 Оставить заявку
               </button>
+              <span v-if="succes == true" class="mt-6"
+                >Спасибо! Ваша заявка принята.</span
+              >
             </div>
           </s-modal-form>
           <img
@@ -248,7 +267,64 @@ export default {
   data () {
     return {
       tabs: 1,
-      orderValue: 1
+      orderValue: 1,
+      form: {
+        name: '',
+        org: '',
+        product: '',
+        phone: '',
+        email: ''
+      },
+      succes: false
+    }
+  },
+  methods: {
+    async getTeelegrammToProduct () {
+      const fullMessege =
+        'Заявка с карточки товара' +
+        '\n' +
+        'Телефон:  ' +
+        this.form.phone +
+        '\n' +
+        'Имя: ' +
+        this.form.name +
+        '\n' +
+        'Сообщение: ' +
+        this.form.product +
+        '\n' +
+        'email: ' +
+        this.form.email +
+        '\n' +
+        'Организация: ' +
+        this.form.org +
+        '\n' +
+        'Товар название: ' +
+        this.productData.attributes.Name + ' - ' +  this.productData.attributes.SubName+
+        '\n' +
+        
+        'Количество: ' +
+        this.orderValue
+
+      if (this.form.phone !== '' && this.form.name !== '') {
+        await this.$axios
+          .post(
+            'https://api.telegram.org/bot5647912171:AAHOM01XJhQLGJHKiWwGF7g2V2nHcgNeyUU/sendMessage?chat_id=-1001835531007',
+            {
+              text: fullMessege
+            }
+          )
+          .then(response => {
+            this.form.phone = ''
+            this.form.name = ''
+            this.form.product = ''
+            this.form.email = ''
+            this.form.org = ''
+            this.succes = true
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      }
     }
   }
 }
