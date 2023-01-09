@@ -94,7 +94,7 @@ export default {
         'Имя: ' +
         this.form.name +
         '\n' +
-        'Товар: ' +
+        'Сообщение: ' +
         this.form.product +
         '\n' +
         'email: ' +
