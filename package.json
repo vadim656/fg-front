@@ -23,7 +23,8 @@
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
     "vue-kinesis": "^1.2.3",
-    "vue-input-facade": "^2.0.1"
+    "vue-input-facade": "^2.0.1",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {}
 }

@@ -39,7 +39,7 @@
                 slide.attributes.H1
               }}</span>
               <span
-                class="text-[80px] sm:text-[172px] font-['Oranienbaum'] sm:pl-24 pb-4 sm:pb-0 leading-10 sm:leading-[10rem]"
+                class="text-[80px] sm:text-[120px] font-['Oranienbaum'] sm:pl-24 pb-4 sm:pb-0 leading-10 sm:leading-[10rem]"
                 >{{ slide.attributes.H2 }}</span
               >
               <span class="text-sm block w-full sm:max-w-[360px]">{{

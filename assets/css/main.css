@@ -30,7 +30,7 @@ html {
 }
 
 .anime {
-  @apply motion-safe:transition duration-[0.25s] ease-in-out ;
+  @apply motion-safe:transition duration-[0.3s] ease-in-out ;
   }
 
 .input-form {
@@ -40,4 +40,12 @@ html {
 
 .gradient {
     background: linear-gradient(94.93deg, #E34134 -1.32%, #C74242 188.57%), linear-gradient(92.23deg, #E34134 -3.32%, #C74242 111.03%), linear-gradient(97.08deg, #D25147 -5.76%, #C74242 185.48%);
+}
+
+
+.list-enter-active, .list-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }

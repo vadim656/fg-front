@@ -14,7 +14,7 @@
             class="absolute -top-16 -right-20 rotate-12"
           />
           <h3
-            class="font-['Oranienbaum'] text-[72px] text-[#242424]/5 leading-[1] w-full"
+            class="font-['Oranienbaum'] text-4xl text-[#242424]/5 leading-[1] w-full"
           >
             {{ slideProductData.attributes.Name }}
           </h3>
@@ -22,17 +22,66 @@
             <span class="font-['Oranienbaum'] text-4xl">{{
               slideProductData.attributes.Name
             }}</span>
-            <span class="text-lg">{{ slideProductData.attributes.SubName }}</span>
-            <span class="text-sm" v-html="slideProductData.attributes.Desc"></span>
+            <span class="text-lg">{{
+              slideProductData.attributes.SubName
+            }}</span>
+            <span
+              class="text-sm"
+              v-html="slideProductData.attributes.Desc"
+            ></span>
           </div>
           <div class="flex flex-col gap-12 w-full">
-            <nuxt-link
-              :to="'/products/' + slideProductData.id"
-              class="flex justify-center items-center gap-1 gradient p-6 rounded-md text-white font-medium max-w-[216px]"
-            >
-              <img src="~/assets/icons/Arrow_down_light.svg" alt="" />
-              Перейти к товару
-            </nuxt-link>
+            <div class="flex justify-between items-center gap-1">
+              <nuxt-link
+                :to="'/products/' + slideProductData.id"
+                class="flex justify-center items-center gap-1 bg-[#F0F0F0] p-6 rounded-md  font-medium max-w-[216px]"
+              >
+                <img src="~/assets/icons/Arrow_down_tem.svg" alt="" />
+                Подробнее
+              </nuxt-link>
+              <button
+                v-if="!getCart.includes(slideProductData.id)"
+                @click="addtoCart(slideProductData)"
+                class="flex justify-center items-center gap-1 gradient p-6 rounded-md text-white font-medium "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                  />
+                </svg>
+                В корзину
+              </button>
+              <button
+              v-else
+                class=" flex justify-center items-center gap-1 gradient p-6 rounded-md text-white font-medium "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+                В корзине
+              </button>
+            </div>
+
             <div class="flex gap-4">
               <button @click="prevSlide">
                 <img src="../assets/icons/arrow-slider.svg" alt="" />
@@ -90,7 +139,7 @@
             ]"
             class="p-4 rounded-md"
           >
-            Соки
+            Приправы
           </button>
         </div>
         <client-only placeholder="Загрузка...">
@@ -115,7 +164,10 @@
                   class="p-10 h-full max-h-[400px]"
                 />
 
-                <div class="flex items-end gap-2 ">
+                <nuxt-link
+                  :to="`/products/` + item.id"
+                  class="flex items-end gap-2 "
+                >
                   <div
                     class="flex flex-col gap-2 items-start sm:items-center mt-10 text-sm"
                   >
@@ -124,10 +176,7 @@
                     }}</span>
                     <span>{{ item.attributes.Name }}</span>
                   </div>
-                  <nuxt-link :to="`/products/` + item.id" class="ml-2">
-                    <img src="~/assets/icons/Group8730.svg" alt="" />
-                  </nuxt-link>
-                </div>
+                </nuxt-link>
               </div>
             </div>
           </agile>
@@ -139,7 +188,7 @@
 
 <script>
 import { VueAgile } from 'vue-agile'
-
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     agile: VueAgile
@@ -164,9 +213,19 @@ export default {
         console.log(this.getProductsSlider.length, this.slideProduct)
         this.slideProduct--
       }
-    }
+    },
+    addtoCart (item) {
+      item['value'] = 1
+      this.ADD_TO_CART(item)
+    },
+    ...mapActions(['ADD_TO_CART'])
   },
   computed: {
+    ...mapGetters(['CART']),
+    getCart () {
+      const idS = this.CART.map(x => x.id)
+      return idS
+    },
     slideProductData () {
       return this.getProductsSlider[this.slideProduct]
     },
@@ -181,7 +240,7 @@ export default {
         )
       } else if (this.tabs == 3) {
         return this.products.data.filter(
-          x => x.attributes.categories.data[0].id == 3
+          x => x.attributes.categories.data[0].id == 4
         )
       }
     }
@@ -205,6 +264,13 @@ export default {
           },
           {
             breakpoint: 600,
+            settings: {
+              slidesToShow: 2
+            }
+          },
+
+          {
+            breakpoint: 1440,
             settings: {
               slidesToShow: 3
             }

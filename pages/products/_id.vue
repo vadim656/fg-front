@@ -30,7 +30,7 @@
               <span class="text-lg"> {{ productData.attributes.SubName }}</span>
               <span class="text-sm" v-html="productData.attributes.Desc"></span>
             </div>
-            <div class="flex flex-col sm:flex-row justify-start gap-4 w-4/5">
+            <div class="flex flex-col sm:flex-row justify-start gap-4 w-full">
               <div
                 class="flex items-center justify-between border-2 rounded-md gap-4 w-full px-1"
               >
@@ -40,13 +40,10 @@
                 >
                   -
                 </button>
-                <input
-                  type="number"
-                  min="1"
-                  v-model="orderValue"
-                  value="1"
-                  class="w-full max-w-[40px] text-center"
-                />
+                <span class="w-full max-w-[40px] text-center">{{
+                  orderValue
+                }}</span>
+
                 <button
                   class="flex justify-center items-center p-4 text-lg bg-gray-100 hover:bg-gray-200 rounded-md anime"
                   @click="orderValue++"
@@ -54,12 +51,53 @@
                   +
                 </button>
               </div>
-              <button
+              <!-- <button
                 @click="$refs.modalOrder.active = true"
                 class="flex justify-center items-center gap-1 gradient p-6 rounded-md text-white font-medium w-full"
               >
                 <img src="~/assets/icons/add-to-cart.svg" alt="" />
                 Заказать
+              </button> -->
+              <button
+                v-if="!getCart.includes(productData.id)"
+                @click="addtoCart(productData)"
+                class="w-full flex justify-center items-center gap-1 gradient p-6 rounded-md text-white font-medium "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                  />
+                </svg>
+                В корзину
+              </button>
+              <button
+                v-else
+                class="w-full  flex justify-center items-center gap-1 gradient p-6 rounded-md text-white font-medium "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+                В корзине
               </button>
             </div>
           </div>
@@ -73,11 +111,6 @@
             alt=""
             class="w-auto h-full max-h-[600px] z-[0]"
           />
-          <!-- <img
-            src="~/assets/img/image12.png"
-            alt=""
-            class="hidden sm:block absolute top-12 right-[400px] z-[1]"
-          /> -->
 
           <s-modal-form ref="modalOrder">
             <div class="w-full max-w-[320px]">
@@ -224,6 +257,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import h3Title from '../../components/h3-title.vue'
 import ID_PRODUCT from '../../gql/ID_PRODUCT.gql'
 import ALL_PRODUCTS from '~/gql/ALL_PRODUCTS.gql'
@@ -245,6 +279,11 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['CART']),
+    getCart () {
+      const idS = this.CART.map(x => x.id)
+      return idS
+    },
     productData () {
       return this.product.data
     },
@@ -279,6 +318,14 @@ export default {
     }
   },
   methods: {
+    addtoCart (item) {
+      let product = item
+
+      product['value'] = this.orderValue
+
+      this.ADD_TO_CART(product)
+    },
+    ...mapActions(['ADD_TO_CART']),
     async getTeelegrammToProduct () {
       const fullMessege =
         'Заявка с карточки товара' +
@@ -299,9 +346,10 @@ export default {
         this.form.org +
         '\n' +
         'Товар название: ' +
-        this.productData.attributes.Name + ' - ' +  this.productData.attributes.SubName+
+        this.productData.attributes.Name +
+        ' - ' +
+        this.productData.attributes.SubName +
         '\n' +
-        
         'Количество: ' +
         this.orderValue
 

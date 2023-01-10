@@ -29,6 +29,7 @@ export default {
     { src: '~/plugins/vue-agile', mode: 'client' },
     { src: '~/plugins/vue-kenesis', mode: 'client' },
     '@plugins/vue-input-facade.js',
+    '~/plugins/persistedState.client.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,13 +46,13 @@ export default {
   ],
 
   publicRuntimeConfig: {
-    baseURL: 'http://admin.felix-good.ru'
+    baseURL: 'https://admin.felix-good.ru'
   },
 
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://admin.felix-good.ru/graphql'
+        httpEndpoint: 'https://admin.felix-good.ru/graphql'
       }
     }
   },

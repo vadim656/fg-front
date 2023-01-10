@@ -1,6 +1,7 @@
 query ID_PRODUCT($ID: ID) {
   product(id: $ID){
     data{
+      id
       attributes{
         Name
         Desc

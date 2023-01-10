@@ -6,7 +6,7 @@
       class="hidden  h-full sm:flex items-center justify-between container w-full gap-6 text-[#242424]"
     >
       <nuxt-link to="/" class="w-full max-w-[240px]">
-        <img src="~/assets/icons/logo-header.svg" alt=""
+        <img src="~/assets/icons/logo-footer.svg" alt=""
       /></nuxt-link>
 
       <div class="w-full">
@@ -20,7 +20,7 @@
           </li>
         </ul>
       </div>
-      <div class="flex gap-4 w-full justify-end text-sm">
+      <div class="flex gap-4 w-full justify-end items-center text-sm">
         <div class="flex gap-1 flex-col">
           <div class="flex gap-1 items-center">
             <img src="~assets/icons/Phone_light.svg" alt="" />
@@ -31,6 +31,32 @@
           <img src="~assets/icons/Message_light.svg" alt="" />
           <span>ketchup2022@bk.ru</span>
         </div>
+        <!-- корзина -->
+        <nuxt-link to="/cart" prefetch class="flex gap-1">
+           Корзина
+          <div class="relative">
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+            />
+          </svg>
+           <span
+            class="absolute -top-2 -right-2 text-xs bg-white rounded-full w-4 h-4 flex justify-center items-center"
+            >{{ CART.length }}</span
+          >
+          </div>
+          
+         
+        </nuxt-link>
       </div>
     </div>
     <!-- mobile -->
@@ -108,26 +134,25 @@
               href="tel:89530722184"
               class="border px-3 py-2 w-full rounded-md text-white border-white flex justify-center items-center gap-2"
             >
-            <span class="flex justify-center items-center">
-               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="w-4 h-4"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </span>
-             
+              <span class="flex justify-center items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
+
               <span class="pb-[1px]">
                 +7(953)072-21-84
               </span>
-              </a
-            >
+            </a>
           </ul>
         </div>
       </div>
@@ -136,6 +161,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -160,6 +186,9 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapGetters(['CART'])
   }
 }
 </script>
