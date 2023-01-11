@@ -3,24 +3,24 @@
     class="w-full mx-auto bg-[#E5E5E5]/10 flex justify-center h-24 absolute top-0 left-0 right-0 z-[9] drop-shadow-sm backdrop-blur-sm"
   >
     <div
-      class="hidden  h-full sm:flex items-center justify-between container w-full gap-6 text-[#242424]"
+      class="hidden  h-full sm:flex items-center justify-between container w-full gap-2 sm:gap-6 text-[#242424]"
     >
       <nuxt-link to="/" class="w-full max-w-[240px]">
         <img src="~/assets/icons/logo-footer.svg" alt=""
       /></nuxt-link>
 
       <div class="w-full">
-        <ul class="flex items-center gap-1 sm:gap-4">
+        <ul class="flex items-center gap-2 lg:gap-4">
           <li v-for="(item, i) in menu" :key="i" class="">
             <nuxt-link
               :to="item.url"
-              class="hover:underline hover:underline-offset-4 anime text-sm"
+              class="hover:underline hover:underline-offset-4 anime text-xs lg:text-sm"
               >{{ item.name }}</nuxt-link
             >
           </li>
         </ul>
       </div>
-      <div class="flex gap-4 w-full justify-end items-center text-sm">
+      <div class="flex gap-4 w-full justify-end items-center text-xs lg:text-sm">
         <div class="flex gap-1 flex-col">
           <div class="flex gap-1 items-center">
             <img src="~assets/icons/Phone_light.svg" alt="" />
@@ -33,29 +33,27 @@
         </div>
         <!-- корзина -->
         <nuxt-link to="/cart" prefetch class="flex gap-1">
-           Корзина
+         <span class="hidden lg:block">Корзина</span> 
           <div class="relative">
             <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-            />
-          </svg>
-           <span
-            class="absolute -top-2 -right-2 text-xs bg-white rounded-full w-4 h-4 flex justify-center items-center"
-            >{{ CART.length }}</span
-          >
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+              />
+            </svg>
+            <span
+              class="absolute -top-2 -right-2 text-xs bg-white rounded-full w-4 h-4 flex justify-center items-center"
+              >{{ CART.length }}</span
+            >
           </div>
-          
-         
         </nuxt-link>
       </div>
     </div>
@@ -66,25 +64,50 @@
       <nuxt-link to="/" class="w-full ml-2 max-w-[100px]">
         <img src="~/assets/icons/logo-header.svg" alt=""
       /></nuxt-link>
-      <button
-        @click="mobActive = !mobActive"
-        class="p-2 flex justify-center items-center"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-10 h-10"
+      <div class="flex items-center gap-2 ">
+        <nuxt-link to="/cart" prefetch class="flex gap-1">
+          <div class="relative">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+              />
+            </svg>
+            <span
+              class="absolute -top-2 -right-2 text-xs bg-white rounded-full w-4 h-4 flex justify-center items-center"
+              >{{ CART.length }}</span
+            >
+          </div>
+        </nuxt-link>
+        <button
+          @click="mobActive = !mobActive"
+          class="p-2 flex justify-center items-center"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-          />
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-10 h-10"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </button>
+      </div>
+
       <!-- menu mob -->
       <div
         v-if="mobActive"

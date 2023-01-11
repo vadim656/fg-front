@@ -1,7 +1,12 @@
 <template>
-  <div class="w-screen slider-bg-custom h-[900px] relative">
+  <div class="w-screen slider-bg-custom h-[700px] sm:h-[900px] relative">
     <client-only placeholder="Загрузка...">
-      <agile id="main-sliders" ref="mainSliderRef" :options="mainSlider">
+      <agile
+        id="main-sliders"
+        class="h-full  max-h-[700px]  sm:max-h-none sm:min-h-[900px]"
+        ref="mainSliderRef"
+        :options="mainSlider"
+      >
         <div
           v-for="(slide, i) in sliders.data"
           :key="i"
@@ -11,7 +16,7 @@
             :src="
               $config.baseURL + slide.attributes.LevitIMG.data.attributes.url
             "
-            class="absolute top-[400px] sm:top-[300px] right-[200px] w-[50%] sm:w-full   sm:right-[500px] z-[-1] rotate-180"
+            class="absolute top-[200px] sm:top-[300px] right-[200px] w-[50%] sm:w-full   sm:right-[500px] z-[-1] rotate-180"
           />
           <img
             :src="
@@ -32,14 +37,14 @@
             class="hidden sm:block absolute  top-32 right-12 z-[-1]"
           />
           <div
-            class="h-full flex flex-col-reverse sm:flex-row  justify-center items-center"
+            class="h-full mt-16 sm:mt-0 flex flex-col-reverse sm:flex-row  justify-end sm:justify-center items-center"
           >
-            <div class="flex flex-col text-white gap-4">
+            <div class="flex flex-col text-white gap-4 sm:gap-8">
               <span class="text-[40px] sm:text-[72px] font-medium">{{
                 slide.attributes.H1
               }}</span>
               <span
-                class="text-[80px] sm:text-[120px] font-['Oranienbaum'] sm:pl-24 pb-4 sm:pb-0 leading-10 sm:leading-[10rem]"
+                class="text-[60px] sm:text-[120px] font-['Oranienbaum'] sm:pl-24 pb-4 sm:pb-0 leading-10 sm:leading-[6rem]"
                 >{{ slide.attributes.H2 }}</span
               >
               <span class="text-sm block w-full sm:max-w-[360px]">{{
@@ -59,7 +64,7 @@
                     $config.baseURL + slide.attributes.Photo.data.attributes.url
                   "
                   alt=""
-                  class="pl-10 mt-10 sm:mt-0 sm:pl-0 w-[80%] h-auto object-cover sm:w-full max-w-[440px]"
+                  class="pl-20 mt-4 sm:mt-0 sm:pl-0 w-[70%] h-auto object-cover sm:w-full max-w-[440px]"
                 />
               </kinesis-element>
             </kinesis-container>
@@ -138,11 +143,13 @@ export default {
   height: 10px;
 }
 
-#main-sliders .agile__track,
-#main-sliders .agile__list,
-#main-sliders .agile__slide,
-#main-sliders {
-  height: 100%;
-  min-height: 900px;
+@media (min-width: 600px) {
+  #main-sliders .agile__track,
+  #main-sliders .agile__list,
+  #main-sliders .agile__slide,
+  #main-sliders {
+    height: 100%;
+    min-height: 900px;
+  }
 }
 </style>

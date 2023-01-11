@@ -1,20 +1,20 @@
 <template>
   <div class="w-full flex justify-center ">
-    <div class="container  py-12 flex justify-between">
+    <div class="container  py-12 flex flex-col sm:flex-row gap-4 sm:gap-2 justify-between">
       <div
-        class="hidden sm:block w-4/12 bg-white p-8 rounded-2xl drop-shadow-2xl"
+        class="w-full  sm:w-4/12 px-4"
       >
         <div
-          class="flex flex-col justify-start items-center gap-4 relative "
+          class="flex flex-col justify-start items-center gap-4 relative bg-white p-6 sm:p-8 rounded-2xl drop-shadow-2xl"
           v-if="slideProductData"
         >
           <img
             src="~/assets/img/image14.png"
             alt=""
-            class="absolute -top-16 -right-20 rotate-12"
+            class="absolute -top-16 -right-2 max-w-[40%] sm:max-w-none sm:-right-20 rotate-12"
           />
           <h3
-            class="font-['Oranienbaum'] text-4xl text-[#242424]/5 leading-[1] w-full"
+            class="hidden sm:block font-['Oranienbaum'] text-4xl text-[#242424]/5 leading-[1] w-full"
           >
             {{ slideProductData.attributes.Name }}
           </h3>
@@ -26,15 +26,15 @@
               slideProductData.attributes.SubName
             }}</span>
             <span
-              class="text-sm"
+              class="text-xs sm:text-sm"
               v-html="slideProductData.attributes.Desc"
             ></span>
           </div>
-          <div class="flex flex-col gap-12 w-full">
-            <div class="flex justify-between items-center gap-1">
+          <div class="flex flex-col gap-4 sm:gap-12 w-full">
+            <div class="flex  justify-between items-start  gap-4 sm:gap-1">
               <nuxt-link
                 :to="'/products/' + slideProductData.id"
-                class="flex justify-center items-center gap-1 bg-[#F0F0F0] p-6 rounded-md  font-medium max-w-[216px]"
+                class="text-xs sm:text-sm flex justify-center items-center gap-1 bg-[#F0F0F0] p-4 sm:p-6 rounded-md  font-medium max-w-[216px]"
               >
                 <img src="~/assets/icons/Arrow_down_tem.svg" alt="" />
                 Подробнее
@@ -42,7 +42,7 @@
               <button
                 v-if="!getCart.includes(slideProductData.id)"
                 @click="addtoCart(slideProductData)"
-                class="flex justify-center items-center gap-1 gradient p-6 rounded-md text-white font-medium "
+                class="text-xs sm:text-sm  flex justify-center items-center gap-1 gradient p-4 sm:p-6 rounded-md text-white font-medium "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -60,9 +60,10 @@
                 </svg>
                 В корзину
               </button>
-              <button
-              v-else
-                class=" flex justify-center items-center gap-1 gradient p-6 rounded-md text-white font-medium "
+              <nuxt-link
+                to="/cart"
+                v-else
+                class="text-xs sm:text-sm  flex justify-center items-center gap-1 gradient p-4 sm:p-6 rounded-md text-white font-medium "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +80,7 @@
                   />
                 </svg>
                 В корзине
-              </button>
+              </nuxt-link>
             </div>
 
             <div class="flex gap-4">
@@ -166,7 +167,7 @@
 
                 <nuxt-link
                   :to="`/products/` + item.id"
-                  class="flex items-end gap-2 "
+                  class="flex items-end gap-2 p-2"
                 >
                   <div
                     class="flex flex-col gap-2 items-start sm:items-center mt-10 text-sm"
@@ -270,7 +271,7 @@ export default {
           },
 
           {
-            breakpoint: 1440,
+            breakpoint: 1540,
             settings: {
               slidesToShow: 3
             }

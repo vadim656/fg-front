@@ -14,7 +14,7 @@
             <img
               src="~/assets/img/image14.png"
               alt=""
-              class=" absolute -top-20 -right-24  sm:-left-24 z-[1] w-[50%] sm:w-[70%]"
+              class=" absolute -top-20 -right-2  sm:-left-24 z-[1] w-[50%] sm:w-[70%]"
             />
             <span
               class="font-['Oranienbaum'] text-[64px] text-[#242424]/5 leading-[1] w-full"
@@ -32,32 +32,25 @@
             </div>
             <div class="flex flex-col sm:flex-row justify-start gap-4 w-full">
               <div
-                class="flex items-center justify-between border-2 rounded-md gap-4 w-full px-1"
+                class="flex items-center justify-between border-2 rounded-md gap-4 w-full p-1"
               >
                 <button
                   class="flex justify-center items-center p-4 text-lg bg-gray-100 hover:bg-gray-200 rounded-md anime"
-                  @click="orderValue--"
+                  @click="minusCart"
                 >
                   -
                 </button>
-                <span class="w-full max-w-[40px] text-center">{{
-                  orderValue
-                }}</span>
+                <span class="w-full max-w-[40px] text-center">
+                  {{ kovVo.value }}
+                </span>
 
                 <button
                   class="flex justify-center items-center p-4 text-lg bg-gray-100 hover:bg-gray-200 rounded-md anime"
-                  @click="orderValue++"
+                  @click="plusCart"
                 >
                   +
                 </button>
               </div>
-              <!-- <button
-                @click="$refs.modalOrder.active = true"
-                class="flex justify-center items-center gap-1 gradient p-6 rounded-md text-white font-medium w-full"
-              >
-                <img src="~/assets/icons/add-to-cart.svg" alt="" />
-                Заказать
-              </button> -->
               <button
                 v-if="!getCart.includes(productData.id)"
                 @click="addtoCart(productData)"
@@ -79,7 +72,8 @@
                 </svg>
                 В корзину
               </button>
-              <button
+              <nuxt-link
+                to="/cart"
                 v-else
                 class="w-full  flex justify-center items-center gap-1 gradient p-6 rounded-md text-white font-medium "
               >
@@ -98,7 +92,7 @@
                   />
                 </svg>
                 В корзине
-              </button>
+              </nuxt-link>
             </div>
           </div>
         </div>
@@ -112,72 +106,6 @@
             class="w-auto h-full max-h-[600px] z-[0]"
           />
 
-          <s-modal-form ref="modalOrder">
-            <div class="w-full max-w-[320px]">
-              <form
-                action=""
-                class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[320px] pb-3"
-              >
-                <div class="sm:col-span-2 flex flex-col gap-2">
-                  <label for="" class="text-sm">Ваше имя</label>
-                  <input
-                    v-model="form.name"
-                    type="text"
-                    placeholder="Иван"
-                    class="input-form"
-                  />
-                </div>
-                <div class="sm:col-span-1 flex flex-col gap-2">
-                  <label for="" class="text-sm">Организация</label>
-                  <input
-                    v-model="form.org"
-                    type="text"
-                    placeholder="ООО"
-                    class="input-form"
-                  />
-                </div>
-                <div class="sm:col-span-2 flex flex-col gap-2">
-                  <label for="" class="text-sm">Сообщение</label>
-                  <textarea
-                    id="message"
-                    rows="4"
-                    v-model="form.product"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 "
-                    placeholder="Напишите..."
-                  ></textarea>
-                </div>
-                <div class="sm:col-span-2 flex flex-col gap-2">
-                  <label for="" class="text-sm">Телефон</label>
-                  <input
-                    v-model="form.phone"
-                    type="text"
-                    placeholder="+7"
-                    v-facade="'+7 (###) ###-##-##'"
-                    class="input-form"
-                  />
-                </div>
-                <div class="sm:col-span-2 flex flex-col gap-2">
-                  <label for="" class="text-sm">Email</label>
-                  <input
-                    v-model="form.email"
-                    type="text"
-                    placeholder="email@email.ru"
-                    class="input-form"
-                  />
-                </div>
-              </form>
-              <button
-                @click="getTeelegrammToProduct"
-                class="flex items-center gap-2 gradient text-white p-6 rounded-lg mt-6"
-              >
-                <img src="~/assets/icons/arrow-form.svg" alt="" />
-                Оставить заявку
-              </button>
-              <span v-if="succes == true" class="mt-6"
-                >Спасибо! Ваша заявка принята.</span
-              >
-            </div>
-          </s-modal-form>
           <img
             src="~/assets/img/Ellipse168.png"
             class="hidden sm:visible absolute top-36 right-0 z-[0] w-[calc(30%+2rem)]"
@@ -218,14 +146,14 @@
             ]"
             class="p-4 rounded-md"
           >
-            Соки
+            Приправы
           </button>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 mt-8">
           <div
             v-for="(item, i) in getProductsSlider"
             :key="i"
-            class="flex flex-col gap-4 justify-center items-center"
+            class="flex flex-col gap-2 sm:gap-4 justify-center items-center"
           >
             <img
               class="p-6"
@@ -237,16 +165,22 @@
 
             <div class="flex items-end gap-2 ">
               <div
-                class="flex flex-col gap-2 items-start sm:items-center mt-10 text-sm"
+                class="flex flex-col gap-2 items-start sm:items-center mt-2 text-sm"
               >
-                <span class="text-[#242424]/50">{{
-                  item.attributes.SubName
-                }}</span>
-                <span>{{ item.attributes.Name }}</span>
+                <nuxt-link
+                  :to="`/products/` + item.id"
+                  class="flex items-end gap-2 p-2"
+                >
+                  <div
+                    class="flex flex-col  sm:gap-2 items-center"
+                  >
+                    <span class="text-[#242424]/50 text-xs">{{
+                      item.attributes.SubName
+                    }}</span>
+                    <span class="text-lg">{{ item.attributes.Name }}</span>
+                  </div>
+                </nuxt-link>
               </div>
-              <nuxt-link :to="`/products/` + item.id" class="ml-2">
-                <img src="~/assets/icons/Group8730.svg" alt="" />
-              </nuxt-link>
             </div>
           </div>
         </div>
@@ -261,9 +195,8 @@ import { mapActions, mapGetters } from 'vuex'
 import h3Title from '../../components/h3-title.vue'
 import ID_PRODUCT from '../../gql/ID_PRODUCT.gql'
 import ALL_PRODUCTS from '~/gql/ALL_PRODUCTS.gql'
-import SModalForm from '../../components/s-modal-form.vue'
 export default {
-  components: { h3Title, SModalForm },
+  components: { h3Title },
   layout: 'main',
   apollo: {
     product: {
@@ -280,6 +213,20 @@ export default {
   },
   computed: {
     ...mapGetters(['CART']),
+    kovVo () {
+      const product = this.$route.params.id
+      const item = this.$store.state.cart.filter(x => x.id == product)
+      const Svalue = item.map(x => x.value)
+      let value = null
+      if (item.length) {
+        value = Svalue[0]
+      } else {
+        value = this.orderValue
+      }
+
+      // let valueF = value[0]
+      return { value, item }
+    },
     getCart () {
       const idS = this.CART.map(x => x.id)
       return idS
@@ -298,7 +245,7 @@ export default {
         )
       } else if (this.tabs == 3) {
         return this.products.data.filter(
-          x => x.attributes.categories.data[0].id == 3
+          x => x.attributes.categories.data[0].id == 4
         )
       }
     }
@@ -318,12 +265,33 @@ export default {
     }
   },
   methods: {
+    plusCart () {
+      const id = this.productData.id
+      if (this.getCart.includes(id)) {
+        this.$store.dispatch('PLUS_CART', id)
+      } else {
+        this.orderValue++
+        console.log('tut+')
+      }
+    },
+    minusCart () {
+      const id = this.productData.id
+      if (this.kovVo.value >= 2 && this.getCart.includes(id)) {
+        this.$store.dispatch('MINUS_CART', id)
+      } else {
+        this.orderValue--
+        console.log('tut-')
+      }
+    },
     addtoCart (item) {
       let product = item
 
       product['value'] = this.orderValue
 
       this.ADD_TO_CART(product)
+    },
+    deleteFromCart (id) {
+      this.$store.dispatch('DELETE_FROM_CART', id)
     },
     ...mapActions(['ADD_TO_CART']),
     async getTeelegrammToProduct () {
