@@ -1,9 +1,9 @@
 <template>
   <div class="w-full flex justify-center ">
-    <div class="container  py-12 flex flex-col sm:flex-row gap-4 sm:gap-2 justify-between">
-      <div
-        class="w-full  sm:w-4/12 px-4"
-      >
+    <div
+      class="container  py-12 flex flex-col sm:flex-row gap-4 sm:gap-2 justify-between"
+    >
+      <div class="w-full  sm:w-4/12 px-4">
         <div
           class="flex flex-col justify-start items-center gap-4 relative bg-white p-6 sm:p-8 rounded-2xl drop-shadow-2xl"
           v-if="slideProductData"
@@ -145,6 +145,7 @@
         </div>
         <client-only placeholder="Загрузка...">
           <agile
+            @after-change="showCurrentSlide($event)"
             id="products"
             ref="carousel"
             :options="allInfo"
@@ -182,6 +183,18 @@
             </div>
           </agile>
         </client-only>
+        <!-- <div class="flex gap-4 sm:hidden justify-center py-4 ">
+          <button @click="prevSlide">
+            <img src="../assets/icons/arrow-slider.svg" alt="" />
+          </button>
+          <button @click="nextSlide">
+            <img
+              src="../assets/icons/arrow-slider.svg"
+              alt=""
+              class="rotate-180"
+            />
+          </button>
+        </div> -->
       </div>
     </div>
   </div>
@@ -198,6 +211,9 @@ export default {
     products: Object
   },
   methods: {
+    showCurrentSlide (event) {
+      this.slideProduct = event.currentSlide
+    },
     nextSlide () {
       this.$refs.carousel.goToNext()
       if (this.getProductsSlider.length - 1 == this.slideProduct) {
