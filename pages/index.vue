@@ -23,7 +23,7 @@ import SSliderProduct from '~/components/s-slider-product.vue'
 
 import ALL_PRODUCTS from '~/gql/ALL_PRODUCTS.gql'
 import ALL_NEWS from '~/gql/ALL_NEWS.gql'
-import GET_SLIDERS from '../gql/GET_SLIDERS.gql'
+import GET_SLIDERS from '~/gql/GET_SLIDERS.gql'
 
 export default {
   components: { mainSlider, SSliderProduct, SNewsAll, SContactForm },

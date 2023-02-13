@@ -24,12 +24,7 @@
           </div>
         </div>
         <div class="h-[200px] sm:h-[500px]  rounded-3xl overflow-hidden">
-          <iframe
-            src="https://yandex.ru/map-widget/v1/?um=constructor%3A2ae277f22b8478c1aa76da9012e5e9eec6d47c6c96908d39b378eb5da26c7547&amp;source=constructor"
-            width="100%"
-            height="500"
-            frameborder="0"
-          ></iframe>
+          <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A6ed2452e3cb0249f536a6836220353aa81582f0a085ff45bb6eeb9786cee03da&amp;source=constructor" width="100%" height="500" frameborder="0"></iframe>
         </div>
       </div>
 
